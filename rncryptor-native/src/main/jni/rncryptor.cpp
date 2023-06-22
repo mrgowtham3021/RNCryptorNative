@@ -35,7 +35,7 @@ using CryptoPP::Base64Encoder;
 using CryptoPP::Base64Decoder;
 
 RNCryptor::RNCryptor() {
-	configureSettings(SCHEMA_2);
+	configureSettings(SCHEMA_3);
 }
 
 void RNCryptor::configureSettings(RNCryptorSchema schemaVersion)
@@ -59,6 +59,13 @@ void RNCryptor::configureSettings(RNCryptorSchema schemaVersion)
 			break;
 
 		case SCHEMA_2:
+			aesMode = MODE_CBC;
+			options = OPTIONS_1;
+			hmac_includesHeader = true;
+			hmac_includesPadding = false;
+			hmac_algorithm = HMAC_SHA256;
+			break;
+		case SCHEMA_3:
 			aesMode = MODE_CBC;
 			options = OPTIONS_1;
 			hmac_includesHeader = true;
